@@ -28,6 +28,11 @@ defmodule Matrex.DB do
   end
 
 
+  def subscribe(args) do
+
+  end
+
+
   @spec login(String.t, String.t)
     :: {:ok, Sessions.tokens} | {:error, atom}
   def login(user, password) do

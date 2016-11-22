@@ -17,6 +17,7 @@ defmodule Matrex.Errors do
   defp error(:invalid_username), do: "M_INVALID_USERNAME"
   defp error({:missing_arg, _}), do: "M_BAD_JSON"
   defp error({:bad_type, _}), do: "M_BAD_JSON"
+  defp error({:bad_value, _}), do: "M_BAD_JSON"
   defp error(:unknown), do: "M_UNKNOWN"
   defp error(:forbidden), do: "M_FORBIDDEN"
   defp error(:missing_token), do: "M_MISSING_TOKEN"
@@ -27,6 +28,7 @@ defmodule Matrex.Errors do
   defp status_code(:invalid_username), do: 400
   defp status_code({:missing_arg,_}), do: 400
   defp status_code({:bad_type,_}), do: 400
+  defp status_code({:bad_value,_}), do: 400
   defp status_code(:unknown), do: 400
   defp status_code(:forbidden), do: 403
   defp status_code(:missing_token), do: 401
@@ -37,6 +39,7 @@ defmodule Matrex.Errors do
   defp message(:invalid_username), do: "User ID is invalid"
   defp message({:missing_arg, key}), do: "Missing required key #{key}"
   defp message({:bad_type, key}), do: "Bad type for key #{key}"
+  defp message({:bad_value, key}), do: "Bad value for key #{key}"
   defp message(:unknown), do: "Bad login type"
   defp message(:forbidden), do: "Forbidden"
   defp message(:missing_token), do: "Access token missing"

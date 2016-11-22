@@ -32,6 +32,7 @@ defmodule Matrex.Validation do
 
   defp validate_value(key, value, acc, options) do
     with :ok <- validate_type(value, options),
+         :ok <- validate_allowed(value, options),
          {:ok, value} <- postprocess(value, options)
     do
       key = get_key(key, options)
@@ -54,8 +55,21 @@ defmodule Matrex.Validation do
   defp _validate_type(:string, _value), do: {:error, :bad_type}
   defp _validate_type(:integer, value) when is_integer(value), do: :ok
   defp _validate_type(:integer, _value), do: {:error, :bad_type}
-  defp _validate_type(:map, %{}), do: :ok
+  defp _validate_type(:boolean, value) when is_boolean(value), do: :ok
+  defp _validate_type(:boolean, _value), do: {:error, :bad_type}
+  defp _validate_type(:map, value) when is_map(value), do: :ok
   defp _validate_type(:map, _value), do: {:error, :bad_type}
+
+
+  defp validate_allowed(value, options) do
+    case Keyword.fetch(options, :allowed) do
+      :error -> :ok
+      {:ok, allowed} -> case value in allowed do
+        true -> :ok
+        false -> {:error, :bad_value}
+      end
+    end
+  end
 
 
   defp postprocess(value, options) do

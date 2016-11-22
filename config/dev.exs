@@ -7,8 +7,19 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :matrex, Matrex.Endpoint,
-  http: [port: 4000],
-  https: [port: 4443,
+  http: [
+    port: 4000,
+    dispatch: [{:_, [
+      {"/_matrix/client/r0/sync", Matrex.Loops.Sync, []},
+      {:_, Plug.Adapters.Cowboy.Handler, {Matrex.Endpoint, []}}
+    ]}],
+  ],
+  https: [
+    port: 4443,
+    dispatch: [{:_, [
+      {"/_matrix/client/r0/sync", Matrex.Loops.Sync, []},
+      {:_, Plug.Adapters.Cowboy.Handler, {Matrex.Endpoint, []}}
+    ]}],
     otp_app: :matrex,
     keyfile: "priv/certs/devkey.pem",
     certfile: "priv/certs/devcert.pem",

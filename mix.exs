@@ -36,6 +36,7 @@ defmodule Matrex.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 2.5"},
       {:cors_plug, "~> 1.1"},
+      {:gproc, "~> 0.5.0"},
     ]
   end
 end
