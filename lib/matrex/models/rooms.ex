@@ -12,7 +12,7 @@ defmodule Matrex.Models.Rooms do
   def new, do: %{}
 
 
-  @spec create(This.t, [RoomEvent.Content.t], Identifier.user)
+  @spec create(This.t, map, Identifier.user)
     :: {Identifier.room, This.t}
   def create(this, contents, actor) do
     id = generate_room_id(this)

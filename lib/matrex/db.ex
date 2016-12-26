@@ -61,7 +61,7 @@ defmodule Matrex.DB do
   end
 
 
-  @spec create_room([RoomEvent.Content.t], Sessions.token)
+  @spec create_room(map, Sessions.token)
     :: {:ok, Identifier.room} | {:error, atom}
   def create_room(contents, access_token) do
     Agent.get_and_update(This, fn data ->

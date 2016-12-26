@@ -22,7 +22,7 @@ defmodule Matrex.DB.Data do
 
   ### Rooms ###
 
-  @spec create_room(This.t, [RoomEvent.Content.t], Identifier.user)
+  @spec create_room(This.t, map, Identifier.user)
     :: {:ok, Identifier.t, This.t} | {:error, atom, This.t}
 
   def create_room(this, contents, user) do
