@@ -38,6 +38,9 @@ defmodule Matrex.Router do
         put "/state/:state_event_type/:state_key", Send, :put
         put "/send/:event_type/:txn_id", Send, :put
 
+        get "/state", State, :get
+        get "/state/:event_type", State, :get_content
+        get "/state/:event_type/:state_key", State, :get_content
       end
     end
   end

@@ -57,6 +57,19 @@ defmodule Matrex.DB.Data do
   end
 
 
+  @spec fetch_state_content(This.t, Identifier.room, RoomEvent.key, Identifier.user)
+    :: {:ok, RoomEvent.Content.t, This.t} | {:error, atom, This.t}
+
+  defp fetch_state_content(this, room_id, event_key, user) do
+    case Rooms.fetch_state_content(this.rooms, room_id, event_key, user) do
+      {:error, error} ->
+        {:error, error, this}
+      {:ok, content, rooms} ->
+        {:ok, content, %This{this | rooms: rooms}}
+    end
+  end
+
+
   ### Auth ###
 
   @spec logout(This.t, Sessions.token)

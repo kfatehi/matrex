@@ -40,8 +40,6 @@ defmodule Matrex.Models.Room do
         StateContent.set_content(content, "creator", actor)
       end)
 
-
-
     update_state(%This{id: id, events: events, state: %State{}}, events)
   end
 

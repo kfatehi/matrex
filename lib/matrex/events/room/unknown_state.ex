@@ -21,7 +21,6 @@ defmodule This do
     do: {:ok, %This{type: type, content: content, state_key: state_key}}
   end
 
-
   def key(this), do: {this.type, this.state_key}
 
 

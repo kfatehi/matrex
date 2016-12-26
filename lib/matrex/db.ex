@@ -98,6 +98,19 @@ defmodule Matrex.DB do
   end
 
 
+  @spec fetch_state_content(Idenfitifer.room, RoomEvent.key, Sessions.token)
+    :: {:ok, RoomEvent.Content.t} | {:error, atom}
+
+  def fetch_state_content(room_id, event_key, access_token) do
+    Agent.get_and_update(This, fn data ->
+      with {:ok, user, data} <- Data.auth(data, access_token) do
+        Data.fetch_state_content(data, room_id, event_key, user)
+      end
+        |> wrap_result
+    end)
+  end
+
+
   # Internal Functions
 
   @spec check_password(Identifier.user, String.t)

@@ -43,6 +43,17 @@ defmodule Matrex.Models.Rooms do
   end
 
 
+  @spec fetch_state_content(This.t, Identifier.room, RoomEvent.key, Identifier.user)
+    :: {:ok, RoomEvent.Content.t, This.t} | {:error, atom}
+  def fetch_state_content(this, room_id, event_key, user) do
+    with {:ok, room} <- fetch_room(this, room_id),
+         {:ok, content, room} <- Room.fetch_state_content(room, event_key, user)
+    do
+      {:ok, content, Map.put(this, room_id, room)}
+    end
+  end
+
+
   # Internal Funcs
 
   @spec fetch_room(This.t, Identifier.room)
